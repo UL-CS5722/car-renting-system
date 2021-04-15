@@ -1,5 +1,5 @@
 from flask import Flask
-from ola_rent.builder import Director, ToyotaBuilder, FordBuilder, HyundaiBuilder
+from ola_rent.vehicles import Director, ToyotaBuilder, FordBuilder, HyundaiBuilder
 from ola_rent.station import Dublin, Cork, Limerick, Galway
 
 app = Flask(__name__)

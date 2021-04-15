@@ -3,7 +3,7 @@ from enum import Enum
 
 class GearType(Enum):
     AUTOMATIC = 1
-    MANUAL = 1
+    MANUAL = 2
 
 
 class HyundaiBuilder(Builder):

@@ -1,6 +1,7 @@
 from flask import Flask
 from ola_rent.vehicles import Director, ToyotaBuilder, FordBuilder, HyundaiBuilder
 from ola_rent.station import Dublin, Cork, Limerick, Galway
+from ola_rent.customer import Prototype, Address
 
 app = Flask(__name__)
 
@@ -40,6 +41,12 @@ def index():
     l = Limerick()
     l.create_station()
     print(l)
+
+    print("**********CUSTOMER CREATION***********")
+    c1 = Prototype()
+    c2 = c1.clone()
+    c2.create('Aman Niyaz', Address('1 Liffey Road', 'Dublin', 'K78 V80', 'Ireland'), 'aniyaz@gmail.com', '083 015 2772', 'Premium')
+    print(c2)
 
     
     return "<h1>Development in Progress</h1>"

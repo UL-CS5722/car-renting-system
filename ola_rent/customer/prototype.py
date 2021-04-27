@@ -1,5 +1,6 @@
 import copy
 from .customer import Customer
+from ..utils import logger
 
 class Prototype:
     def __new_customer(self, cust):
@@ -7,4 +8,5 @@ class Prototype:
         return _new
 
     def clone(self):
+        logger.info("New customer is created!")
         return Prototype().__new_customer(cust=Customer())

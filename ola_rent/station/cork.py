@@ -1,4 +1,5 @@
 from .station import Station, Address
+from ..utils import logger
 
 class Cork(Station):
 
@@ -23,7 +24,7 @@ class Cork(Station):
         self.set_address()
         self.set_email()
         self.set_phone()
-
+        logger.info(f"station {self._name} is created!")
         return self
 
 

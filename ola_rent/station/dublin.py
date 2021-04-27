@@ -1,4 +1,5 @@
 from .station import Station, Address
+from ..utils import logger
 
 class Dublin(Station):
 
@@ -23,6 +24,7 @@ class Dublin(Station):
         self.set_address(Address('Unit 7, Clondalkin', 'Dublin', 'K80 YV61'))
         self.set_email()
         self.set_phone()
+        logger.info(f"station {self._name} is created!")
 
         return self
 

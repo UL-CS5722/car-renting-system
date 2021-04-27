@@ -3,6 +3,7 @@ from .vehicle import Vehicle
 class Car(Vehicle):
     def __init__(self):
         super().__init__()
+        self._id = None
         self._model = None
         self._gear_type = None
 

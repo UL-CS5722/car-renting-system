@@ -12,6 +12,7 @@ class Director:
         self._builder._build_gear()
         self._builder._build_company()
         self._builder._build_year()
+        self._builder._build_id()
 
     def get_car(self):
         return self._builder.get_car()

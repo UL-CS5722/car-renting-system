@@ -1,4 +1,4 @@
-from .station import Station
+from .station import Station, Address
 
 class Galway(Station):
 
@@ -8,7 +8,7 @@ class Galway(Station):
     def set_code(self, code='GLY'):
         self._code = code
 
-    def set_address(self, address='67 O\'Connell\'s Street, Galway'):
+    def set_address(self, address=Address('67 O\'Connell\'s Street', 'Galway', 'K94 HU90')):
         self._address = address
 
     def set_email(self, email='galway@olarent.ie'):
@@ -25,7 +25,6 @@ class Galway(Station):
         self.set_phone()
 
         return self
-
 
     def __repr__(self):
         return f"***Station***\nName: {self._name}\nCode: {self._code}\nAddress: {self._address}\nEmail Address: {self._email}\nPhone Number: {self._phone}"

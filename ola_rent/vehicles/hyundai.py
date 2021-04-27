@@ -23,3 +23,6 @@ class HyundaiBuilder(Builder):
     def _build_year(self):
         self._car._year = 2020
 
+    # def _build_id(self):
+    #     self._car._id = self._car._company + str(self._car._year)
+

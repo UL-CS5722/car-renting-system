@@ -1,4 +1,4 @@
-from .station import Station
+from .station import Station, Address
 
 class Cork(Station):
 
@@ -8,7 +8,7 @@ class Cork(Station):
     def set_code(self, code='CRK'):
         self._code = code
 
-    def set_address(self, address='12 William Street, Cork'):
+    def set_address(self, address=Address('12 William Street', 'Cork', 'C76 01GR')):
         self._address = address
 
     def set_email(self, email='cork@olarent.ie'):

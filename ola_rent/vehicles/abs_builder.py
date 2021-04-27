@@ -1,5 +1,6 @@
 import abc
 from .car import Car
+from random import randint
 
 class Builder(metaclass=abc.ABCMeta):
     """
@@ -13,6 +14,9 @@ class Builder(metaclass=abc.ABCMeta):
 
     def new_car(self):
         self._car = Car()
+    
+    def _build_id(self):
+        self._car._id = self._car._company.lower() + str(self._car._year)[2:] + str(randint(0, 100))
 
     @abc.abstractmethod
     def _build_seats(self):

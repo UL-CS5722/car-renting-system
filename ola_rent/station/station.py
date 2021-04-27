@@ -1,28 +1,34 @@
 import abc
+from ..customer.address import Address
 
 class Station(metaclass=abc.ABCMeta):
     def __init__(self):
         self._name = None
         self._code = None
-        self._address = None
+        self._address = Address('', '', '')
         self._email = None
         self._phone = None
 
     ##setters
+    @abc.abstractmethod
     def set_name(self, name):
-        self._name = name
+        pass
 
+    @abc.abstractmethod
     def set_code(self, code):
-        self._code = code
+        pass
 
+    @abc.abstractmethod
     def set_address(self, address):
-        self._address = address
+        pass
 
+    @abc.abstractmethod
     def set_email(self, email):
-        self._email = email
+        pass
 
+    @abc.abstractmethod
     def set_phone(self, phone):
-        self._phone = phone
+        pass
 
     @abc.abstractmethod
     def create_station(self):

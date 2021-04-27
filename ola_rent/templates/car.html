@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Cars{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<h3>Available Cars</h3>
+{% for car in cars %}
+    <div class="car_view">
+        <ul>
+            <li>ID: {{ car._id }}</li>
+            <li>Company: {{ car._company }}</li>
+            <li>Model: {{ car._model }}</li>
+            <li>Created: {{ car._year }}</li>
+    </div>
+{% endfor %}
+{% endblock %}

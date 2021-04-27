@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Stations{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<h3>Available Stations</h3>
+{% for station in stations %}
+    <div class="station_view">
+        <ul>
+            <li>Name: {{ station.get_name() }}</li>
+            <li>CODE: {{ station.get_code() }}</li>
+            <li>Address: {{ station.get_address() }}</li>
+            <li>Contact: {{ station.get_phone() }}</li>
+            <li>Email: {{ station.get_email() }}</li>
+        </ul>
+    </div>
+{% endfor %}
+{% endblock %}

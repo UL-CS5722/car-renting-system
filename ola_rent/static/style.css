@@ -1,0 +1,22 @@
+html {
+    font-family: sans-serif;
+    background: #eee;
+    padding: 1rem;
+}
+  
+body {
+    max-width: fit-content;
+    margin: 0 auto;
+    background: white;
+}
+nav h1 {
+    text-align: center;
+}
+
+.station_view {
+    display: flex;
+    background-color: antiquewhite;
+    margin: 0.5cm;
+    padding: 0.1cm;
+}
+  

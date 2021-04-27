@@ -1,4 +1,4 @@
-from .station import Station
+from .station import Station, Address
 
 class Dublin(Station):
 
@@ -8,7 +8,7 @@ class Dublin(Station):
     def set_code(self, code='DUB'):
         self._code = code
 
-    def set_address(self, address='Unit 7, Clondalkin, Co. Dublin'):
+    def set_address(self, address=''):
         self._address = address
 
     def set_email(self, email='dublin@olarent.ie'):
@@ -20,7 +20,7 @@ class Dublin(Station):
     def create_station(self):
         self.set_name()
         self.set_code()
-        self.set_address()
+        self.set_address(Address('Unit 7, Clondalkin', 'Dublin', 'K80 YV61'))
         self.set_email()
         self.set_phone()
 

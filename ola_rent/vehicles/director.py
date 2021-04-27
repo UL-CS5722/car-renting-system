@@ -1,3 +1,5 @@
+from ..utils import logger
+
 class Director:
     """
     Construct an object using the Builder Interface
@@ -13,6 +15,7 @@ class Director:
         self._builder._build_company()
         self._builder._build_year()
         self._builder._build_id()
+        logger.info(f"{self._builder._car._company} company car with ID: {self._builder._car._id} is built!")
 
     def get_car(self):
         return self._builder.get_car()

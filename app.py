@@ -2,6 +2,7 @@ from flask import Flask, redirect, url_for, render_template, request, flash, Blu
 from ola_rent.vehicles import Director, ToyotaBuilder, FordBuilder, HyundaiBuilder
 from ola_rent.station import Dublin, Cork, Limerick, Galway
 from ola_rent.customer import Prototype, Address
+from ola_rent import logger
 
 app = Flask(__name__, template_folder="templates", root_path='ola_rent', static_folder='ola_rent') #root_path='ola_rent'
 # bp = Blueprint('auth', __name__)
@@ -60,6 +61,7 @@ def register():
 
         elif username in customer_dict:
             error = f"User {username} already exists. Please Login Instead."
+            logger.error(f"customer with {username} already exists")
         
         if error is None:
             print("**********CUSTOMER CREATION***********")
@@ -80,9 +82,12 @@ def login():
 
         if user == 'aman' and pswd == '2020':
             print(f"Welcome! {user}")
+            logger.info(f"user {user} successfully logged in.")
             return redirect('/')
         error = 'Username and Password mismatch, Try again!'
+        logger.warning(error)
         flash(error)
+        return redirect('login')
     return render_template('auth/login.html')
     
 
@@ -105,7 +110,7 @@ def station():
     l.create_station()
     station_dict[l.get_code()] = l
     if not request.method == 'GET':
-        return "<h4>Sorry! You can't create a new Station"
+        return "<h4>Sorry! You can't create a new Station<h4>"
     
     stations = station_dict.values()
     return render_template('station.html', stations=stations)

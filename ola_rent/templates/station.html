@@ -7,8 +7,11 @@
 {% block content %}
 <h3>Available Stations</h3>
 {% for station in stations %}
-    <div class="station_view">
-        <ul>
+    <div style="display: flex;
+    background-color: antiquewhite;
+    margin: 0.5cm;
+    padding: 0.1cm;">
+        <ul style="list-style-type: none;">
             <li>Name: {{ station.get_name() }}</li>
             <li>CODE: {{ station.get_code() }}</li>
             <li>Address: {{ station.get_address() }}</li>

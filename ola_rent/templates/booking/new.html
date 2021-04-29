@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %} New Booking {% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<h4>Book your car | OlaRent</h2>
+  <form method="post">
+    <label for="code">Select a station</label>
+    <select name="code">
+        <option value="DUB">Dublin</option>
+        <option value="LK">Limerick</option>
+        <option value="GLY">Galway</option>
+        <option value="CRK">Cork</option>
+      </select><br/>
+    <label for="bookingdate">Booking Date</label>
+    <input type="datetime-local" name="bookingdate"><br/>
+    <label for="cars">Choose a car:</label>
+    <select name="car_id"> <!-- mutliple can be added as well-->
+        {% for car in cars %}
+            <option value='{{ car._id }}'>{{ car._company }} | {{ car._model }} | {{ car._year }}</option>
+        {% endfor %}
+    </select><br>
+    <input type="submit" value="Book"><br>
+  </form>
+  {% block footer %} {% endblock %}
+{% endblock %}

@@ -6,9 +6,14 @@
 
 {% block content %}
 <h3>Available Cars</h3>
+<p>Total count: {{ car_count }}</p>
 {% for car in cars %}
-    <div class="car_view">
-        <ul>
+    <div style="display: flex;
+    background-color: rgb(160, 163, 135);
+    margin: 0.5cm;
+    padding: 0.1cm;
+    color: rgb(12, 218, 233);">
+        <ul style="list-style-type: none;">
             <li>ID: {{ car._id }}</li>
             <li>Company: {{ car._company }}</li>
             <li>Model: {{ car._model }}</li>

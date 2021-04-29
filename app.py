@@ -3,26 +3,32 @@ from ola_rent.vehicles import Director, ToyotaBuilder, FordBuilder, HyundaiBuild
 from ola_rent.station import Dublin, Cork, Limerick, Galway
 from ola_rent.customer import Prototype, Address
 from ola_rent import logger
+from ola_rent.booking import Facade
 
 app = Flask(__name__, template_folder="templates", root_path='ola_rent', static_folder='ola_rent') #root_path='ola_rent'
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 # bp = Blueprint('auth', __name__)
 
 ###defining data structures
 customer_dict = dict()
 car_dict = dict()
 station_dict = dict()
+booking_dict = dict()
 
+#customer prototype
 c1 = Prototype()
 
-
+#Home route
 @app.route('/')
 def index():
     print("******WELCOME TO OLA RENT*******") 
     return render_template('index.html')
 
+#admin route
 @app.route('/admin')
 def admin():
-    return redirect(url_for('index'))
+    logger.info('Admin log in initiated')
+    return redirect(url_for('login'))
 
 @app.route('/car')
 def car():
@@ -44,8 +50,9 @@ def car():
     car_dict[hyundai._id] = hyundai
 
     cars = car_dict.values()
+    car_count = len(car_dict)
 
-    return render_template('car.html', cars=cars)
+    return render_template('car.html', cars=cars, car_count=car_count)
 
 @app.route('/register', methods=('GET', 'POST'))
 def register():
@@ -90,7 +97,7 @@ def login():
         return redirect('login')
     return render_template('auth/login.html')
     
-
+########station creation
 @app.route('/station')
 def station():
     print("*********STATIONS CREATION*********")
@@ -114,3 +121,33 @@ def station():
     
     stations = station_dict.values()
     return render_template('station.html', stations=stations)
+
+###booking
+@app.route('/booking', methods=('GET', 'POST'))
+def booking():
+    '''Function to handle booking process'''
+    cars = car_dict.values()
+    if request.method == 'POST':
+        error = None
+        s_code = request.form['code']
+        bookingdate = request.form['bookingdate']
+        c_id = request.form['car_id']
+
+        if not s_code:
+            error = "Please select a station!"
+        elif not bookingdate:
+            error = 'Booking date is missing :('
+        elif not c_id:
+            error = "Please choose a car!"
+        if not error is None:
+            print
+            return redirect('booking')
+
+        booking_obj = Facade()
+        b_id = booking_obj.operations(s_code, bookingdate)
+        booking_dict[b_id] = booking_obj
+
+        return render_template('booking/success.html', msg=f"Success! Your booking ID: {b_id}")
+
+    return render_template('booking/new.html', cars=cars)
+

@@ -1,9 +1,5 @@
 from .abs_builder import Builder
-from enum import Enum
-
-class GearType(Enum):
-    AUTOMATIC = 1
-    MANUAL = 2
+from ..utils import GearType
 
 
 class ToyotaBuilder(Builder):

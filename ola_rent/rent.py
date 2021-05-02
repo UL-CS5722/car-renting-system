@@ -1,15 +1,21 @@
-from flask import Flask, redirect, url_for, render_template, request, flash, Blueprint
-from ola_rent.vehicles import Director, ToyotaBuilder, FordBuilder, HyundaiBuilder
-from ola_rent.station import Dublin, Cork, Limerick, Galway
-from ola_rent.customer import Prototype, Address
-from ola_rent import logger
-from ola_rent.booking import Facade
+from flask import Flask, redirect, url_for, render_template, request, flash, Blueprint, g
+from werkzeug.exceptions import abort
 
-app = Flask(__name__, template_folder="templates", root_path='ola_rent', static_folder='ola_rent') #root_path='ola_rent'
-app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
-# bp = Blueprint('auth', __name__)
+from ola_rent.auth import login_required
+from ola_rent.db import get_db
 
-###defining data structures
+from .vehicles import Director, ToyotaBuilder, FordBuilder, HyundaiBuilder
+from .station import Dublin, Cork, Limerick, Galway
+from .customer import Prototype, Address
+from .utils import logger
+from .booking import Facade
+
+# app = Flask(__name__, template_folder="templates", root_path='ola_rent', static_folder='ola_rent') #root_path='ola_rent'
+# app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+
+bp = Blueprint('rent', __name__)
+
+# ###defining data structures
 customer_dict = dict()
 car_dict = dict()
 station_dict = dict()
@@ -19,18 +25,18 @@ booking_dict = dict()
 c1 = Prototype()
 
 #Home route
-@app.route('/')
+@bp.route('/')
 def index():
     print("******WELCOME TO OLA RENT*******") 
     return render_template('index.html')
 
 #admin route
-@app.route('/admin')
+@bp.route('/admin')
 def admin():
     logger.info('Admin log in initiated')
     return redirect(url_for('login'))
 
-@app.route('/car')
+@bp.route('/car')
 def car():
     print("---------CARS AVAILABLE----------")
     #builder car executing 
@@ -53,52 +59,9 @@ def car():
     car_count = len(car_dict)
 
     return render_template('car.html', cars=cars, car_count=car_count)
-
-@app.route('/register', methods=('GET', 'POST'))
-def register():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        error = None
-        if not username:
-            error = 'Username is required'
-
-        elif not password:
-            error = 'Password is required'
-
-        elif username in customer_dict:
-            error = f"User {username} already exists. Please Login Instead."
-            logger.error(f"customer with {username} already exists")
-        
-        if error is None:
-            print("**********CUSTOMER CREATION***********")
-            c2 = c1.clone()
-            c2.create('Aman Niyaz', Address('1 Liffey Road', 'Dublin', 'K78 V80', 'Ireland'), 'aniyaz@gmail.com', '083 015 2772', 'Premium')
-            customer_dict[username] = c2
-
-            return redirect(url_for('login'))
-        flash(error)
-        
-    return render_template('auth/register.html')
-
-@app.route('/login', methods=('GET', 'POST'))
-def login():
-    if request.method == 'POST':
-        user = request.form['username']
-        pswd = request.form['password']
-
-        if user == 'aman' and pswd == '2020':
-            print(f"Welcome! {user}")
-            logger.info(f"user {user} successfully logged in.")
-            return redirect('/')
-        error = 'Username and Password mismatch, Try again!'
-        logger.warning(error)
-        flash(error)
-        return redirect('login')
-    return render_template('auth/login.html')
     
 ########station creation
-@app.route('/station')
+@bp.route('/station')
 def station():
     print("*********STATIONS CREATION*********")
     d = Dublin()
@@ -123,14 +86,14 @@ def station():
     return render_template('station.html', stations=stations)
 
 ###booking
-@app.route('/booking', methods=('GET', 'POST'))
+@bp.route('/booking', methods=('GET', 'POST'))
 def booking():
     '''Function to handle booking process'''
     cars = car_dict.values()
     if request.method == 'POST':
         error = None
         s_code = request.form['code']
-        bookingdate = request.form['bookingdate']
+        bookingdate = request.form['bookingdate']   
         c_id = request.form['car_id']
 
         if not s_code:

@@ -6,11 +6,13 @@
 
 {% block content %}
 <h4>Register | OlaRent</h2>
-  <form action='register' method="post">
+  <div class="auth_div">
+  <form action='register' method="post" class="auth_form">
     <label for="username">Username</label>
     <input name="username" id="username" required><br>
     <label for="password">Password</label>
     <input type="password" name="password" id="password" required><br>
     <input type="submit" value="Register">
   </form>
+</div>
 {% endblock %}

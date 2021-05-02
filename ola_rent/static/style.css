@@ -6,17 +6,52 @@ html {
   
 body {
     max-width: fit-content;
+    text-align: center;
     margin: 0 auto;
     background: white;
+    align-items: center;
 }
 nav h1 {
     text-align: center;
 }
 
+ul {
+    list-style-type: none;
+}
+
 .station_view {
     display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: antiquewhite;
     margin: 0.5cm;
     padding: 0.1cm;
+    max-width: 400px;
+}
+
+div ul li {
+    margin: 10px;
+}
+
+.car_view {
+    display: flex;
+    background-color: rgb(160, 163, 135);
+    margin: 0.5cm;
+    padding: 0.1cm;
+    color: rgb(12, 218, 233);
 }
   
+.auth_div {
+    display: table;
+    width: 100%;
+ }
+
+ .auth_form {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+ }
+
+input, label {
+     padding: 5px;
+ }

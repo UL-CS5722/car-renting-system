@@ -20,3 +20,8 @@ nav h1 {
     padding: 0.1cm;
 }
   
+.wishlist_view {
+    display: inline-flex;
+    background-color: moccasin;
+    max-width: 50%;
+}

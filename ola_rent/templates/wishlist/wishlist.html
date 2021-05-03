@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Wishlist{% endblock %}</h1>
+  
+{% endblock %}
+
+{% block content %}
+    <button id='wish_button' onclick="add_wish">Add</button> 
+    <div id='add_wish' style="display: none;">
+        <form method="POST" action="wishlist">
+            <label for="model">Car Model</label>
+            <input name="model" id="model"><br>
+            <label for="year">Year</label>
+            <input name="year" id="year"><br>
+            <input type="submit" value="Add">
+        </form>
+    </div>
+    {% if cars|length == 0 %}
+    <h4>Your wishlist is empty!</h4>
+    {% endif %}
+    {% for car in cars %}
+    <div class="wishlist_view" style="display: inline-flex;
+    background-color: moccasin;
+    max-width: 50%;margin: 0.2cm;padding: 0.2cm;">
+        <p>{{ car }}</p>
+        <form method="POST" action="wishlist" style="margin: 0.2cm;padding: 0.2cm;">
+            <input type="hidden" value="{{ car }}" id="delete_car">
+            <input type="submit" value="Delete" id="delete">
+        </form>
+    </div>
+    {% endfor %}
+
+    <script>
+        document.querySelector("button").addEventListener("click", function(){
+      document.querySelector("div").style.display = "block";
+      document.querySelector("button").style.display = "none";
+  });
+    </script>
+{% endblock %}

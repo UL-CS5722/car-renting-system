@@ -4,6 +4,7 @@ from ola_rent.station import Dublin, Cork, Limerick, Galway
 from ola_rent.customer import Prototype, Address
 from ola_rent import logger
 from ola_rent.booking import Facade
+from ola_rent.wishlist import Wishlist, Originator, Caretaker
 
 app = Flask(__name__, template_folder="templates", root_path='ola_rent', static_folder='ola_rent') #root_path='ola_rent'
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -140,7 +141,7 @@ def booking():
         elif not c_id:
             error = "Please choose a car!"
         if not error is None:
-            print
+            print(error)
             return redirect('booking')
 
         booking_obj = Facade()
@@ -151,3 +152,78 @@ def booking():
 
     return render_template('booking/new.html', cars=cars)
 
+###Wishlist
+@app.route('/wishlist', methods=('GET', 'POST'))
+def wishlist():
+    #Create a new wishlist'''
+    wishlist = Wishlist()
+    # wishlist.add_car("Honda_2019")
+    # wishlist.add_car("Toyota_2019")
+    # wishlist.add_car("Ford_2020")
+
+    '''Create an object for wishlist'''
+    cars = wishlist.get_car()
+    newstate = wishlist.to_str(cars) #Convert to list to string
+
+    '''Create a memento object'''
+    originator = Originator(newstate)
+    caretaker = Caretaker(originator)
+    caretaker.backup()   #Save state
+    caretaker.show_history()  #Show history of saved states
+
+    # wishlist.add_car("Benz_2020")    #Add a new car to the list
+    # newstate = wishlist.to_str(cars)    #Convert to list to string
+    # originator.new_state(newstate)    #Create a new state
+
+    # caretaker.backup()   #Save state
+    # caretaker.show_history()  #Show history of saved states
+
+    # wishlist.add_car("Ford_2010")   #Add a new car to the list
+    # newstate = wishlist.to_str(cars)   #Convert to list to string'''
+    # originator.new_state(newstate)      
+
+    # caretaker.backup()  #Save state'''
+    # caretaker.show_history()  #Show history of saved states'''
+
+    # '''Delete item from wishlist'''
+    # wishlist.remove("Benz_2020")   #remove an item from the list''' 
+
+    # '''Undo wishlist'''
+    # prev =  caretaker.undo()
+    # prev_lst = wishlist.to_lst(prev)
+    # wishlist.set_car(prev_lst)
+    # cars = wishlist.get_car()
+    print(cars)
+    if request.method == "POST":
+        try:
+            if request.form['delete']:
+                '''Delete item from wishlist'''
+                car_delete = request.form['delete_car']
+                wishlist.remove(car_delete)   #remove an item from the list'''
+                cars = wishlist.get_car()
+                return render_template('wishlist/wishlist.html', cars=cars)
+        except:
+            pass
+        model = request.form['model']
+        year = request.form['year']
+        error = None
+        if not model:
+            error = "Model is required"
+        elif not year:
+            error = "year is a required field"
+        if not error == None:
+            flash(error)
+            return redirect(url_for('wishlist'))
+        token = str(model) + "_" + str(year)
+        wishlist.add_car(token)
+        newstate = wishlist.to_str(cars)    #Convert to list to string
+        originator.new_state(newstate)    #Create a new state
+        
+        caretaker.backup()   #Save state
+        caretaker.show_history()  #Show history of saved states
+        
+        cars = wishlist.get_car()
+        return render_template('wishlist/wishlist.html', cars=cars)
+    return render_template('wishlist/wishlist.html', cars=cars)
+    
+        #wishlist.add_car("Test_2010")

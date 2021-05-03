@@ -1,18 +1,20 @@
 html {
     font-family: sans-serif;
     background: #eee;
-    padding: 1rem;
+    /* padding: 1rem; */
 }
   
 body {
-    max-width: fit-content;
+    max-width: 50%;
     text-align: center;
     margin: 0 auto;
-    background: white;
+    background: rgb(224, 230, 216);
     align-items: center;
 }
-nav h1 {
+h1 {
     text-align: center;
+    color: lightseagreen;
+    text-shadow: limegreen;
 }
 
 ul {
@@ -20,7 +22,7 @@ ul {
 }
 
 .station_view {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     background-color: antiquewhite;
@@ -29,25 +31,33 @@ ul {
     max-width: 400px;
 }
 
-div ul li {
-    margin: 10px;
+.car_view {
+    display: inline-flex;
+    background-color: rgb(77, 76, 78);    
+    color: rgb(8, 248, 228);
+    max-width: 300px;
+    max-height: 200px;
+    padding: 0.1cm;
+    margin: 0.2cm;
+    align-self: center;
+}
+.car_view ul li {
+    margin: 0;
+    text-align: left;
 }
 
-.car_view {
-    display: flex;
-    background-color: rgb(160, 163, 135);
-    margin: 0.5cm;
-    padding: 0.1cm;
-    color: rgb(12, 218, 233);
-}
-  
-<<<<<<< HEAD
 .wishlist_view {
     display: inline-flex;
     background-color: moccasin;
     max-width: 50%;
+    margin: 0.2cm;
+    padding: 0.2cm;
 }
-=======
+
+.wishlist_view form {
+    margin: 0.2cm;
+    padding: 0.2cm;
+}
 .auth_div {
     display: table;
     width: 100%;
@@ -62,4 +72,3 @@ div ul li {
 input, label {
      padding: 5px;
  }
->>>>>>> main

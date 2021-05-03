@@ -41,6 +41,13 @@ div ul li {
     color: rgb(12, 218, 233);
 }
   
+<<<<<<< HEAD
+.wishlist_view {
+    display: inline-flex;
+    background-color: moccasin;
+    max-width: 50%;
+}
+=======
 .auth_div {
     display: table;
     width: 100%;
@@ -55,3 +62,4 @@ div ul li {
 input, label {
      padding: 5px;
  }
+>>>>>>> main

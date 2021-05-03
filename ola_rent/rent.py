@@ -11,8 +11,6 @@ from .utils import logger
 from .booking import Facade
 from .wishlist import Wishlist, Originator, Caretaker
 
-# app = Flask(__name__, template_folder="templates", root_path='ola_rent', static_folder='ola_rent') #root_path='ola_rent'
-# app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 bp = Blueprint('rent', __name__)
 
@@ -166,7 +164,7 @@ def wishlist():
                 cars = wishlist.get_car()
                 return render_template('wishlist/wishlist.html', cars=cars)
         except:
-            pass
+            pass    
         model = request.form['model']
         year = request.form['year']
         error = None

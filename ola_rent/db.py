@@ -29,6 +29,14 @@ def init_db():
     with current_app.open_resource('schema.sql') as f:
         db.executescript(f.read().decode('utf8'))
 
+    # with resources.path(
+    #  "project.data", "ola_rent.db"
+    # ) as sqlite_filepath:
+    #     engine = create_engine(f"sqlite:///{sqlite_filepath}")
+    # Session = sessionmaker()
+    # Session.configure(bind=engine)
+    # session = Session()
+
 
 @click.command('init-db')
 @with_appcontext    # @app.teardown_appcontext

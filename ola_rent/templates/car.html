@@ -6,14 +6,14 @@
 
 {% block content %}
 <h3>Available Cars</h3>
-<p>Total count: {{ car_count }}</p>
+<p>Total count: <b>{{ car_count }}</b></p>
 {% for car in cars %}
     <div class="car_view">
-        <ul>
-            <li>ID: {{ car._id }}</li>
-            <li>Company: {{ car._company }}</li>
-            <li>Model: {{ car._model }}</li>
-            <li>Created: {{ car._year }}</li>
+      <ul>
+        <li>Company: {{ car._company }}</li>
+        <li>Model: {{ car._model }}</li>
+        <li>Year: {{ car._year }}</li>
+      </ul>
     </div>
 {% endfor %}
 {% endblock %}

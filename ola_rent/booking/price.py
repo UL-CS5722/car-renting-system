@@ -38,14 +38,14 @@ def classic_customer(order):
     
     return order.price * 0.30
   
-"""main function"""
+"""main function
 if __name__ == "__main__":
   
     '''price value will be derived from the booking record'''
     print(Total(20000, 1))
       
-    """with discount strategy as 20 % discount"""
+    #with discount strategy as 20 % discount
     print(Total(20000, cust_type = classic_customer, cust_id= 1))
   
-    """with discount strategy as On Sale Discount"""
-    print(Total(20000, cust_type = premium_customer, cust_id= 1))
+    #with discount strategy as On Sale Discount
+    print(Total(20000, cust_type = premium_customer, cust_id= 1))"""

@@ -86,10 +86,3 @@ payments = Table(
     Column("method", String),
     Column("status", String)
 )
-
-
-
-con = engine.connect()
-# con.execute(addresses.insert(), id=1, street_no=1, street_name="Liffey Road", city="Lucan, Dublin", postcode="K78YV80", country="Ireland")
-
-con.execute("INSERT INTO addresses (id, street_no, street_name, city, postcode, country) VALUES (1, 1, 'Liffey Road', 'Lucan, Dublin', 'K78YV80', 'Ireland')")

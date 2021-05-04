@@ -120,9 +120,6 @@ def booking():
 def wishlist():
     #Create a new wishlist'''
     wishlist = Wishlist()
-    # wishlist.add_car("Honda_2019")
-    # wishlist.add_car("Toyota_2019")
-    # wishlist.add_car("Ford_2020")
 
     '''Create an object for wishlist'''
     cars = wishlist.get_car()
@@ -134,28 +131,6 @@ def wishlist():
     caretaker.backup()   #Save state
     caretaker.show_history()  #Show history of saved states
 
-    # wishlist.add_car("Benz_2020")    #Add a new car to the list
-    # newstate = wishlist.to_str(cars)    #Convert to list to string
-    # originator.new_state(newstate)    #Create a new state
-
-    # caretaker.backup()   #Save state
-    # caretaker.show_history()  #Show history of saved states
-
-    # wishlist.add_car("Ford_2010")   #Add a new car to the list
-    # newstate = wishlist.to_str(cars)   #Convert to list to string'''
-    # originator.new_state(newstate)      
-
-    # caretaker.backup()  #Save state'''
-    # caretaker.show_history()  #Show history of saved states'''
-
-    # '''Delete item from wishlist'''
-    # wishlist.remove("Benz_2020")   #remove an item from the list''' 
-
-    # '''Undo wishlist'''
-    # prev =  caretaker.undo()
-    # prev_lst = wishlist.to_lst(prev)
-    # wishlist.set_car(prev_lst)
-    # cars = wishlist.get_car()
     print(cars)
     if request.method == "POST":
         try:
@@ -189,4 +164,3 @@ def wishlist():
         return render_template('wishlist/wishlist.html', cars=cars)
     return render_template('wishlist/wishlist.html', cars=cars)
     
-        #wishlist.add_car("Test_2010")
